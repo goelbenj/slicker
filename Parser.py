@@ -49,8 +49,9 @@ def getJerk(acLst):
         currVal = acLst[i - 1]
         jerkVal = nextVal - currVal/deltaT
         jerkLst.append(jerkVal)
+    return jerkLst
     
-def getExceedFreq(acLst, maxJerk, maxAcc):
+def getExceedFreq(acLst, maxJerk = 0.9 , maxAcc = 2):
     jerkList = getJerk(acLst)
     exceedCount = 0
     timeDif = acLst[len(acLst) - 1]
@@ -63,4 +64,8 @@ def getExceedFreq(acLst, maxJerk, maxAcc):
     
     return exceedCount/timeDif
 
-
+if __name__ == "__main__":
+    acLst1 = parseValues("accelerations1.csv")
+    acLst2 = parseValues("accelerations2.csv")
+    print(getExceedFreq(acLst1))
+    print(getExceedFreq(acLst2))
